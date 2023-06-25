@@ -3,11 +3,23 @@ dotenv.config();
 const PORT = process.env.PORT || 8000;
 
 import express from "express";
+import morgan from "morgan";
 const app = express();
+//connect database
 
+import connectMongoDB from "./src/config/mongoConfig.js";
+connectMongoDB();
+//middlewares
+app.use(morgan("dev"));
+app.use(express.json()); //to send file from fron end to server
+import cors from "cors";
+app.use(cors());
+//apis
+import userRouter from "./src/routers/userRouter.js";
+app.use("/api/v1/user", userRouter);
 app.use("/", (req, res) => {
   res.json({
-    status: "sucess",
+    status: "success",
     message: "Server is running",
   });
 });

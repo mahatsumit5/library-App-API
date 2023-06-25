@@ -1,6 +1,25 @@
 
 @rootApi=http://localhost:8000/
-
+@userApi={{rootApi}}api/v1/user
 ###server testing
 
 GET {{rootApi}}
+
+
+#####user api
+####GET USER
+GET {{userApi}}
+
+####create USER
+POST {{userApi}}
+Content-Type: application/json
+
+{
+    "role":"admin",
+    "fName":"Sumit",
+    "lName": "Mahat",
+    "phone" :"123456",
+    "email" : "mahatsut3@gmail.com",
+    "password" :"thisispass",
+    "address":"sydney"
+}
