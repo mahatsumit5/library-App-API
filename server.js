@@ -16,7 +16,10 @@ import cors from "cors";
 app.use(cors());
 //apis
 import userRouter from "./src/routers/userRouter.js";
+import bookRouter from "./src/routers/bookRouter.js";
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/book", bookRouter);
+
 app.use("/", (req, res) => {
   res.json({
     status: "success",

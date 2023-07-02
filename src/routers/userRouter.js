@@ -5,12 +5,15 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   try {
-    console.log(req.body);
     res.json({
       status: "success",
       message: "Here are the user information",
     });
   } catch (error) {
+    req.json({
+      stateus: "error",
+      message: "error.message",
+    });
     console.log(error);
   }
 });
@@ -44,7 +47,6 @@ router.post("/", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     //get the data
-    console.log(req.body);
     const { email, password } = req.body;
     // check if the user exit with received  email and get user
     const user = await getUserByEmail(email);
@@ -55,27 +57,21 @@ router.post("/login", async (req, res) => {
       if (isMatch) {
         user.password = undefined;
         // const { password,..rest } = user;
-        res.json({
+        return res.json({
           status: "success",
           message: "login successfull",
           user,
         });
       }
-    } else {
-      res.json({
-        status: "error",
-        message: "Invalid Credentials",
-      });
-    }
-  } catch (error) {
-    let msg = error.message;
-
-    if (msg.includes("E11000 duplicate key error")) {
-      msg = "There is another user who uses this email in the system";
     }
     res.json({
       status: "error",
-      message: msg,
+      message: "Invalid Credentials",
+    });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
     });
   }
 });
