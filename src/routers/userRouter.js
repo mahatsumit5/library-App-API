@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
   } catch (error) {
     req.json({
       stateus: "error",
-      message: "error.message",
+      message: error.message,
     });
     console.log(error);
   }
@@ -25,11 +25,11 @@ router.post("/", async (req, res) => {
     user?._id
       ? res.json({
           status: "success",
-          message: "New user has been created",
+          message: "Congratulations, New user has been created",
         })
       : res.json({
           status: "error",
-          message: "unabale to create user",
+          message: " Unable to create user",
         });
   } catch (error) {
     let msg = error.message;
@@ -59,14 +59,14 @@ router.post("/login", async (req, res) => {
         // const { password,..rest } = user;
         return res.json({
           status: "success",
-          message: "login successfull",
+          message: `Welcome Back ${user.fName} ${user.lName} `,
           user,
         });
       }
     }
     res.json({
       status: "error",
-      message: "Invalid Credentials",
+      message: `Invalid Credintails`,
     });
   } catch (error) {
     res.json({
