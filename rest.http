@@ -2,11 +2,10 @@
 @rootApi=http://localhost:8000/
 @userApi={{rootApi}}api/v1/user
 ###server testing
-
+@burrowApi={{rootApi}}api/v1/burrow
 GET {{rootApi}}
 
 
-#####user api
 ####GET USER
 GET {{userApi}}
 
@@ -22,4 +21,24 @@ Content-Type: application/json
     "email" : "mahatsut3@gmail.com",
     "password" :"thisispass",
     "address":"sydney"
+}
+
+
+
+#=========burrow api
+####post book
+
+POST {{burrowApi}}
+Content-Type: application/json
+
+{
+    "bookId":"asdfdsaf",
+    "bookName":"sumit",
+    "thumbnail":"",
+    "userId":"alskdjfdsakfa",
+    "UserName":"Sumit Mahat",
+    "dueDate":"",
+    "isReturned":"",
+    "returnDate":""
+
 }

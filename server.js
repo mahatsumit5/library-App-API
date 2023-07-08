@@ -17,8 +17,10 @@ app.use(cors());
 //apis
 import userRouter from "./src/routers/userRouter.js";
 import bookRouter from "./src/routers/bookRouter.js";
+import burrowRouter from "./src/routers/burrowRouter.js";
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/book", bookRouter);
+app.use("/api/v1/burrow", burrowRouter);
 
 app.use("/", (req, res) => {
   res.json({
