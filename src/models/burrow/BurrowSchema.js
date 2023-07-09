@@ -17,7 +17,6 @@ const burrowSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     required: true,
   },
-
   userName: {
     type: String,
     required: true,
@@ -28,14 +27,12 @@ const burrowSchema = new mongoose.Schema({
   },
   isReturned: {
     type: Boolean,
-    required: true,
     default: false,
   },
-  returnDate: {
+  returnedDate: {
     type: Date,
-    required: true,
     default: null,
   },
 });
 
-export default mongoose.model("Burrow", burrowSchema); //Users
+export default mongoose.model("Burrow", burrowSchema); //burrows

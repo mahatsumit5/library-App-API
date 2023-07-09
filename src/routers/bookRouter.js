@@ -5,9 +5,10 @@ import {
   updateBook,
   deleteBook,
 } from "../models/book/BookModel.js";
+import { adminAuth, auth } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", auth, adminAuth, async (req, res) => {
   try {
     console.log(req.body);
 
@@ -43,7 +44,7 @@ router.get("/", async (req, res) => {
   } catch (error) {}
 });
 
-router.put("/", async (req, res) => {
+router.put("/", auth, adminAuth, async (req, res) => {
   try {
     const { __v, _id, ...rest } = req.body;
     const result = await updateBook(_id, rest);
@@ -64,7 +65,7 @@ router.put("/", async (req, res) => {
     });
   }
 });
-router.delete("/:_id", async (req, res) => {
+router.delete("/:_id", auth, adminAuth, async (req, res) => {
   //colon will be variable now
   try {
     const { _id } = req.params;

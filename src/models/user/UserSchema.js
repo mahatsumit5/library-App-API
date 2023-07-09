@@ -37,6 +37,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  profile: {
+    type: String,
+    required: false,
+    default: "",
+  },
 });
 
 export default mongoose.model("User", userSchema); //Users

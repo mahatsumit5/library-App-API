@@ -24,7 +24,6 @@ Content-Type: application/json
 }
 
 
-
 #=========burrow api
 ####post book
 
@@ -41,4 +40,15 @@ Content-Type: application/json
     "isReturned":"",
     "returnDate":""
 
+
+}
+
+
+####put 
+PUT {{burrowApi}}
+Content-Type: application/json
+
+{
+    "_id":"64a9109ffaaf8f756e26e4ac",
+    "bookId":"64a90b95faaf8f756e26e473"
 }
