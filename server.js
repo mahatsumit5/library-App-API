@@ -20,10 +20,11 @@ import { auth } from "./src/middleware/authMiddleware.js";
 import userRouter from "./src/routers/userRouter.js";
 import bookRouter from "./src/routers/bookRouter.js";
 import burrowRouter from "./src/routers/burrowRouter.js";
+import reviewRouter from "./src/routers/reviewRouter.js";
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/book", bookRouter);
 app.use("/api/v1/burrow", auth, burrowRouter);
-
+app.use("/api/v1/review", reviewRouter);
 app.use("/", (req, res) => {
   res.json({
     status: "success",
