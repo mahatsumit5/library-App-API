@@ -3,6 +3,7 @@
 @userApi={{rootApi}}api/v1/user
 ###server testing
 @burrowApi={{rootApi}}api/v1/burrow
+@reviewApi={{rootApi}}api/v1/review
 GET {{rootApi}}
 
 
@@ -50,5 +51,16 @@ Content-Type: application/json
 
 {
     "_id":"64a9109ffaaf8f756e26e4ac",
+    "bookId":"64a90b95faaf8f756e26e473"
+}
+
+
+#==================review api
+#####GET
+
+GET {{reviewApi}}
+Content-Type: application/json
+
+{
     "bookId":"64a90b95faaf8f756e26e473"
 }

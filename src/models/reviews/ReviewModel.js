@@ -4,9 +4,9 @@ export const addReview = (reviewObj) => {
   return reviewSchema(reviewObj).save();
 };
 
-// export const getBook = () => {
-//   return bookSchema.find();
-// };
+export const getReview = (bookId) => {
+  return reviewSchema.find({ bookId });
+};
 
 // export const updateBook = (_id, obj) => {
 //   return bookSchema.findByIdAndUpdate(_id, obj);
