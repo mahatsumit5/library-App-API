@@ -5,9 +5,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const { bookId } = req.body;
-    console.log(bookId);
-    const reviewList = await getReview(bookId);
+    const reviewList = await getReview();
     console.log(reviewList);
     reviewList
       ? res.json({
@@ -28,8 +26,6 @@ router.get("/", async (req, res) => {
 });
 router.post("/", async (req, res) => {
   try {
-    console.log(req.body);
-
     const result = await addReview(req.body);
 
     result?._id
@@ -46,7 +42,6 @@ router.post("/", async (req, res) => {
       status: "error",
       message: error.message,
     });
-    console.log(error);
   }
 });
 
