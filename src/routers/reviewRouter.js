@@ -4,6 +4,7 @@ import {
   deleteReview,
   getReview,
 } from "../models/reviews/ReviewModel.js";
+import { auth } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -49,10 +50,9 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/:_id", auth, async (req, res) => {
   try {
-    const { _id } = req.body;
-    console.log(_id);
+    const { _id } = req.params;
     const result = await deleteReview(_id);
     result?._id
       ? res.json({
