@@ -12,6 +12,6 @@ export const getReview = () => {
 //   return bookSchema.findByIdAndUpdate(_id, obj);
 // };
 
-// export const deleteBook = (_id) => {
-//   return bookSchema.findByIdAndDelete(_id);
-// };
+export const deleteReview = (_id) => {
+  return reviewSchema.findByIdAndDelete(_id);
+};
