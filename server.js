@@ -6,7 +6,6 @@ import express from "express";
 import morgan from "morgan";
 const app = express();
 //connect database
-
 import connectMongoDB from "./src/config/mongoConfig.js";
 connectMongoDB();
 //middlewares
@@ -14,6 +13,10 @@ app.use(morgan("dev"));
 app.use(express.json()); //to send file from fron end to server
 import cors from "cors";
 app.use(cors());
+
+import path from "path";
+const _dirName = path.resolve();
+app.use(express.static(_dirName + "/build"));
 
 import { auth } from "./src/middleware/authMiddleware.js";
 //apis
@@ -25,11 +28,9 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/book", bookRouter);
 app.use("/api/v1/burrow", auth, burrowRouter);
 app.use("/api/v1/review", reviewRouter);
-app.use("/d", (req, res) => {
-  res.json({
-    status: "success",
-    message: "Server is running",
-  });
+
+app.use("/", (req, res) => {
+  res.sendFile(_dirName + "/index.html");
 });
 
 app.listen(PORT, (error) => {

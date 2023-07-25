@@ -3,8 +3,9 @@ import {
   addReview,
   deleteReview,
   getReview,
+  updateReview,
 } from "../models/reviews/ReviewModel.js";
-import { auth } from "../middleware/authMiddleware.js";
+import { auth, adminAuth } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -29,7 +30,7 @@ router.get("/", async (req, res) => {
     });
   }
 });
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     const result = await addReview(req.body);
 
@@ -41,6 +42,28 @@ router.post("/", async (req, res) => {
       : res.json({
           status: "error",
           Message: "unable to add reviews ",
+        });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+});
+
+router.put("/", auth, adminAuth, async (req, res) => {
+  try {
+    const { __v, _id, ...rest } = req.body;
+    const result = await updateReview(_id, rest);
+    console.log(req.body);
+    result?._id
+      ? res.json({
+          status: "success",
+          message: "Review has been updated",
+        })
+      : res.json({
+          status: "error",
+          message: "unable to update review",
         });
   } catch (error) {
     res.json({
