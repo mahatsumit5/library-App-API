@@ -30,7 +30,10 @@ app.use("/api/v1/burrow", auth, burrowRouter);
 app.use("/api/v1/review", reviewRouter);
 
 app.use("/", (req, res) => {
-  res.sendFile(_dirName + "/build/index.html");
+  res.json({
+    status: "sucess",
+    message: "Server is up and running",
+  });
 });
 
 app.listen(PORT, (error) => {
