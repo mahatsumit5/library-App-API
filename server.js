@@ -6,8 +6,7 @@ import express from "express";
 import morgan from "morgan";
 const app = express();
 //connect database
-import connectMongoDB from "./src/config/mongoConfig.js";
-connectMongoDB();
+
 //middlewares
 app.use(morgan("dev"));
 app.use(express.json()); //to send file from fron end to server
@@ -32,9 +31,23 @@ app.use("/api/v1/review", reviewRouter);
 app.use("/", (req, res) => {
   res.sendFile("/index.html");
 });
+import mongoose from "mongoose";
 
-app.listen(PORT, (error) => {
-  error
-    ? console.log("Error starting server")
-    : console.log(`Server is up and running in http://localhost:${PORT}`);
-});
+const dbLink =
+  process.env.NODE_ENV === "production"
+    ? process.env.MONGO_CLIENT
+    : "mongodb://127.0.0.1:27017/librarySystem";
+
+mongoose
+  .connect(dbLink)
+  .then(() => {
+    console.log("mongo connected");
+    app.listen(PORT, (err) => {
+      err
+        ? console.log(err.message)
+        : console.log(`Server running at http://localhost:${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.log(error.message);
+  });
