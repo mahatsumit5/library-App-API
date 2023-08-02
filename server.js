@@ -28,9 +28,12 @@ app.use("/api/v1/book", bookRouter);
 app.use("/api/v1/burrow", auth, burrowRouter);
 app.use("/api/v1/review", reviewRouter);
 
-// app.use("/", (req, res) => {
-//   res.sendFile("/index.html");
-// });
+app.use("/", (req, res) => {
+  res.sendFile("/index.html");
+  if (err) {
+    res.status(500).send(err);
+  }
+});
 
 import mongoose from "mongoose";
 
