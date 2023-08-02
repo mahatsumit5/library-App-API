@@ -29,10 +29,7 @@ app.use("/api/v1/burrow", auth, burrowRouter);
 app.use("/api/v1/review", reviewRouter);
 
 app.use("/", (req, res) => {
-  res.sendFile("/index.html");
-  if (err) {
-    res.status(500).send(err);
-  }
+  res.sendFile(_dirName + "/build/index.html");
 });
 
 import mongoose from "mongoose";
