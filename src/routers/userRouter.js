@@ -10,7 +10,20 @@ import {
 import { comparePass, hashPassword } from "../utils/bcrypt.js";
 import { adminAuth, auth } from "../middleware/authMiddleware.js";
 const router = express.Router();
+import multer from "multer";
+const imgPath = "public/user/images";
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    console.log("from multer", file);
+    cb(null, imgPath);
+  },
+  filename: (req, file, cb) => {
+    const fullFileName = Date.now() + "=" + file.originalname;
+    cb(null, fullFileName);
+  },
+});
 
+const upload = multer({ storage });
 router.get("/", auth, async (req, res) => {
   try {
     const { _id } = req.userInfo;
@@ -111,6 +124,30 @@ router.put("/update", auth, async (req, res) => {
     const { __v, _id, ...rest } = req.body;
     console.log(rest);
     const user = await updateUser(_id, rest);
+    user?._id
+      ? res.json({
+          status: "success",
+          message: "Update Successfull",
+          user,
+        })
+      : res.json({
+          status: "error",
+          message: " unable to Update",
+        });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.messages,
+    });
+  }
+});
+
+router.put("/uploadImg", upload.single("profile"), auth, async (req, res) => {
+  try {
+    const { _id } = req.userInfo;
+    console.log(_id);
+
+    const user = await updateUser(_id, { profile: req.file.path });
     user?._id
       ? res.json({
           status: "success",

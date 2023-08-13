@@ -16,6 +16,7 @@ app.use(cors());
 import path from "path";
 const _dirName = path.resolve();
 app.use(express.static(_dirName + "/build")); //GIVE ACCESS TO USE FILE INSIDE OF BUILD FOLDER
+app.use(express.static(_dirName + "/public")); //GIVE ACCESS TO USE FILE INSIDE OF BUILD FOLDER
 
 import { auth } from "./src/middleware/authMiddleware.js";
 //apis
